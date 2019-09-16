@@ -51,4 +51,8 @@ def videogames_index(request):
 
 def videogames_detail(request, videogame_id):
     videogame = Videogame.objects.get(id=videogame_id)
-    return render(request, 'videogames/detail.html', { 'videogame': videogame })
+    # instantiate PlaytimeForm to be rendered in the template
+    playtime_form = FeedingForm()
+    return render(request, 'videogames/detail.html', { 
+        'videogame': videogame, 'playtime_form': playtime_form
+    })
