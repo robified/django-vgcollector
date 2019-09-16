@@ -1,6 +1,6 @@
 from django.shortcuts import render
 # Add the follwoing import
-from django.http import HttpResponse # Okay to delete this line because home is not rending a home.html
+# from django.http import HttpResponse # Okay to delete this line because home is now rending a home.html
 from .models import Videogame
 
 # # Add the Video Game class & list and view function below the imports
@@ -20,6 +20,7 @@ from .models import Videogame
 # Create your views here.
 # Define the home view
 def home(request):
+    # return HttpResponse('<h1>Herro! /ᐠ｡‸｡ᐟ\ﾉ</h1>')
     return render(request, 'home.html')
 
 def about(request):
