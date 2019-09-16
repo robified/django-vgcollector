@@ -10,10 +10,10 @@
             <span class="card-title">{{ videogame.name }}</span>
             <p>Genre: {{ videogame.genre }}</p>
             <p>Description: {{ videogame.description }}</p>
-            {% if videogame.age > 1995 %}
-            <p>Year: {{ videogame.age }}</p>
+            {% if videogame.year > 1990 %}
+            <p>Year: {{ videogame.year }}</p>
             {% else %}
-            <p>Year: Before 1994</p>
+            <p>Year: Before 1990</p>
             {% endif %}
         </div>
     </a>
