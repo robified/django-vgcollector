@@ -10,7 +10,8 @@ class VideogameCreate(CreateView):
     fields = '__all__'
     # Or you can do
     # fields = ['name', 'genre', 'description', 'year']
-    
+    success_url = '/videogames/'
+
 # # Add the Video Game class & list and view function below the imports
 # class Videogame: # Note that parens are optional if not inheriting from another class
 #     def __init__(self, name, genre, description, year):
@@ -36,7 +37,7 @@ def about(request):
 
 # Add new view
 def videogames_index(request):
-    videogames = Videogame.objects.all()
+    videogames = Videogame.objects.order_by('name')
     return render(request, 'videogames/index.html', { 'videogames': videogames })
 
 def videogames_detail(request, videogame_id):

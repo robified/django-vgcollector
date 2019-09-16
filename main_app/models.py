@@ -1,4 +1,6 @@
 from django.db import models
+# Import the reverse function
+from django.urls import reverse
 
 # Create your models here.
 class Videogame(models.Model):
@@ -10,3 +12,7 @@ class Videogame(models.Model):
     # new code below
     def __str__(self):
         return self.name
+    
+    # add this method
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'videogame_id': self.id})
