@@ -3,11 +3,15 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+# Import the login_required decorator
+from django.contrib.auth.decorators import login_required
+# Import the mixin for class-based views
+from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.http import HttpResponse # Okay to delete this line because home is now rending a home.html
 from .models import Videogame, Console
 from .forms import PlaytimeForm
 
-class VideogameCreate(CreateView):
+class VideogameCreate(LoginRequiredMixin, CreateView):
     model = Videogame
     # fields = '__all__'
     # Or you can do
@@ -25,7 +29,7 @@ class VideogameUpdate(UpdateView):
     # Let's disallow the renaming of a video game by excluding the name field!
     fields = ['genre', 'description', 'year']
 
-class VideogameDelete(DeleteView):
+class VideogameDelete(LoginRequiredMixin, DeleteView):
     model = Videogame
     success_url = '/videogames/'
 
@@ -43,26 +47,25 @@ class VideogameDelete(DeleteView):
 #     Videogame('The Legend of Zelda: A Link to the Past', 'Action-adventure', 'an action-adventure game developed and published by Nintendo.', 1991)
 # ]
 
-class ConsoleList(ListView):
+class ConsoleList(LoginRequiredMixin, ListView):
     model = Console
 
-class ConsoleDetail(DetailView):
+class ConsoleDetail(LoginRequiredMixin, DetailView):
     model = Console
 
-class ConsoleCreate(CreateView):
+class ConsoleCreate(LoginRequiredMixin, CreateView):
     model = Console
     fields = '__all__'
 
-class ConsoleUpdate(UpdateView):
+class ConsoleUpdate(LoginRequiredMixin, UpdateView):
     model = Console
     fields = ['name', 'developer']
 
-class ConsoleDelete(DeleteView):
+class ConsoleDelete(LoginRequiredMixin, DeleteView):
     model = Console
     success_url = '/consoles/'
 
 # Create your views here.
-# Define the home view
 def home(request):
     # return HttpResponse('<h1>Herro! /ᐠ｡‸｡ᐟ\ﾉ</h1>')
     return render(request, 'home.html')
@@ -70,7 +73,7 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-# Add new view
+@login_required
 def videogames_index(request):
     # This reads ALL videogames, not just the logged in user's videogames
     videogames = Videogame.objects.filter(user=request.user).order_by('name')
@@ -78,6 +81,7 @@ def videogames_index(request):
     # videogames = request.user.videogames_set.all()
     return render(request, 'videogames/index.html', { 'videogames': videogames })
 
+@login_required
 def videogames_detail(request, videogame_id):
     videogame = Videogame.objects.get(id=videogame_id)
     # instantiate PlaytimeForm to be rendered in the template
@@ -86,6 +90,7 @@ def videogames_detail(request, videogame_id):
         'videogame': videogame, 'playtime_form': playtime_form
     })
 
+@login_required
 def add_playtime(request, videogame_id):
     # create the ModelForm using the data in request.POST
     form = PlaytimeForm(request.POST)
@@ -96,6 +101,10 @@ def add_playtime(request, videogame_id):
         new_feeding.videogame_id = videogame_id
         new_feeding.save()
     return redirect('detail', videogame_id=videogame_id)
+
+# add_photo
+# assoc_playtime
+# unassoc_playtime
 
 def signup(request):
     error_message = ''
