@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Add the following import
 # from django.http import HttpResponse # Okay to delete this line because home is now rending a home.html
 from .models import Videogame
+from .forms import PlaytimeForm
 
 class VideogameCreate(CreateView):
     model = Videogame
