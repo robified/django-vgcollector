@@ -26,7 +26,7 @@ class Videogame(models.Model):
         return reverse('detail', kwargs={'videogame_id': self.id})
 
 class Playtime(models.Model):
-    date = models.DateField()
+    date = models.DateField('play date')
     time_of_day = models.CharField(
         max_length=1,
         # add the 'choices' field option
