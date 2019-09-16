@@ -1,6 +1,7 @@
 from django.db import models
 # Import the reverse function
 from django.urls import reverse
+from datetime import date
 
 # A tuple of 2-tuples
 TIME_OF_DAY = (
@@ -17,13 +18,14 @@ class Videogame(models.Model):
     description = models.TextField(max_length=350)
     year = models.IntegerField()
 
-    # new code below
     def __str__(self):
         return self.name
     
-    # add this method
     def get_absolute_url(self):
         return reverse('detail', kwargs={'videogame_id': self.id})
+
+    def played_for_today(self):
+        return self.playtime_set.filter(date=date.today()).count() >= len(TIME_OF_DAY)
 
 class Playtime(models.Model):
     date = models.DateField('play date')
@@ -42,6 +44,6 @@ class Playtime(models.Model):
         # Nice method for obtaining the friendly value of a Field.choice
         return f"{self.get_time_of_day_display()} on {self.date}"
     
-    # change the default sort
+    # change the default sort from lastest to oldest
     class Meta:
         ordering = ['-date']
