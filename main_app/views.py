@@ -30,3 +30,7 @@ def about(request):
 def videogames_index(request):
     videogames = Videogame.objects.all()
     return render(request, 'videogames/index.html', { 'videogames': videogames })
+
+def videogames_detail(request, videogame_id):
+    videogame = Videogame.objects.get(id=videogame_id)
+    return render(request, 'videogames/detail.html', { 'videogame': videogame })

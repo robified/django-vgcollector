@@ -6,4 +6,6 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     # route for video games index
     path('videogames/', views.videogames_index, name='index'),
+    path('videogames/<int:videogame_id>/', views.videogames_detail, name='detail'),
+
 ]

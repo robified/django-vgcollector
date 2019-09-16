@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Video Game Details</h1>
+
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ videogame.name }}</span>
+        <p>Genre: {{ videogame.genre }}</p>
+        <p>Description: {{ videogame.description }}</p>
+        {% if videogame.age > 1995 %}
+        <p>Year: {{ videogame.age }}</p>
+        {% else %}
+        <p>Year: Before 1994</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
