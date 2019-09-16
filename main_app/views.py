@@ -9,10 +9,16 @@ from .forms import PlaytimeForm
 
 class VideogameCreate(CreateView):
     model = Videogame
-    fields = '__all__'
+    # fields = '__all__'
     # Or you can do
-    # fields = ['name', 'genre', 'description', 'year']
+    fields = ['name', 'genre', 'description', 'year']
     success_url = '/videogames/'
+    # This inherited method is called when a valid videogame form is being submitted
+    def form_valid(self, form):
+        # Assign the logged in user (self.request.user)
+        form.instance.user = self.request.user
+        # Let the CreateView do its job as usual
+        return super().form_valid(form)
 
 class VideogameUpdate(UpdateView):
     model = Videogame
