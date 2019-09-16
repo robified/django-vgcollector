@@ -14,5 +14,9 @@
         <p>Year: Before 1994</p>
         {% endif %}
     </div>
+    <div class="card-action">
+        <a href="{% url 'videogames_update' videogame.id %}">Edit</a>
+        <a href="{% url 'videogames_delete' videogame.id%}">Delete</a>
+    </div>
 </div>
 {% endblock %}

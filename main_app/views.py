@@ -1,6 +1,6 @@
 from django.shortcuts import render
 # Add the following import
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Add the following import
 # from django.http import HttpResponse # Okay to delete this line because home is now rending a home.html
 from .models import Videogame
@@ -10,6 +10,15 @@ class VideogameCreate(CreateView):
     fields = '__all__'
     # Or you can do
     # fields = ['name', 'genre', 'description', 'year']
+    success_url = '/videogames/'
+
+class VideogameUpdate(UpdateView):
+    model = Videogame
+    # Let's disallow the renaming of a video game by excluding the name field!
+    fields = ['genre', 'description', 'year']
+
+class VideogameDelete(DeleteView):
+    model = Videogame
     success_url = '/videogames/'
 
 # # Add the Video Game class & list and view function below the imports
