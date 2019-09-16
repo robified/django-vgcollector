@@ -12,6 +12,16 @@ TIME_OF_DAY = (
 )
 
 # Create your models here.
+class Console(models.Model):
+    name = models.CharField(max_length=100)
+    developer = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+    
+    def get_absolute_url(self):
+        return reverse('consoles_detail', kwargs={'pk': self.id})
+    
 class Videogame(models.Model):
     name = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
