@@ -72,7 +72,10 @@ def about(request):
 
 # Add new view
 def videogames_index(request):
-    videogames = Videogame.objects.order_by('name')
+    # This reads ALL videogames, not just the logged in user's videogames
+    videogames = Videogame.objects.filter(user=request.user).order_by('name')
+    # You could also retrieve the logged in user's videogames like this
+    # videogames = request.user.videogames_set.all()
     return render(request, 'videogames/index.html', { 'videogames': videogames })
 
 def videogames_detail(request, videogame_id):
