@@ -21,9 +21,11 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Video Game Collector</a></li>
         </ul>
         <ul class="right">
-          <li><a href="/about">About</a></li>
+          <!-- <li><a href="/about">About</a></li> -->
+          <li><a href="{% url 'about' %}">About</a></li>
           <!-- new markup below -->
-          <li><a href="/videogames">View All My Video Games</a></li>
+          <!-- <li><a href="/videogames">View All My Video Games</a></li> -->
+          <li><a href="{% url 'index' %}">View All My Video Games</a></li>
         </ul>
       </div>
     </nav>
