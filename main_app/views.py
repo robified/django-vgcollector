@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 # Add the following import
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 # Add the following import
 # from django.http import HttpResponse # Okay to delete this line because home is now rending a home.html
-from .models import Videogame
+from .models import Videogame, Console
 from .forms import PlaytimeForm
 
 class VideogameCreate(CreateView):
@@ -35,6 +36,24 @@ class VideogameDelete(DeleteView):
 #     Videogame('Bayonetta', 'Action, hack and slash', 'an action-adventure hack and slash video game developed by PlatinumGames and published by Sega.', 2009),
 #     Videogame('The Legend of Zelda: A Link to the Past', 'Action-adventure', 'an action-adventure game developed and published by Nintendo.', 1991)
 # ]
+
+class ConsoleList(ListView):
+    model = Console
+
+class ConsoleDetail(DetailView):
+    model = Console
+
+class ConsoleCreate(CreateView):
+    model = Console
+    fields = '__all__'
+
+class ConsoleUpdate(UpdateView):
+    model = Console
+    fields = ['name', 'developer']
+
+class ConsoleDelete(DeleteView):
+    model = Console
+    success_url = '/consoles/'
 
 # Create your views here.
 # Define the home view
