@@ -12,4 +12,10 @@ urlpatterns = [
     path('videogames/create/', views.VideogameCreate.as_view(), name='videogames_create'),
     path('videogames/<int:pk>/update/', views.VideogameUpdate.as_view(), name='videogames_update'),
     path('videogames/<int:pk>/delete/', views.VideogameDelete.as_view(), name='videogames_delete'),
+    # crud routes for consoles
+    path('consoles/', views.ConsoleList.as_view(), name='consoles_index'),
+    path('consoles/<int:pk>/', views.ConsoleDetail.as_view(), name='consoles_detail'),
+    path('consoles/create/', views.ConsoleCreate.as_view(), name='consoles_create'),
+    path('consoles/<int:pk>/update/', views.ConsoleUpdate.as_view(), name='consoles_update'),
+    path('consoles/<int:pk>/delete/', views.ConsoleDelete.as_view(), name='consoles_delete'),
 ]
