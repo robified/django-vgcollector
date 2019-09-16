@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 # Add the following import
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Add the following import
@@ -57,3 +57,14 @@ def videogames_detail(request, videogame_id):
     return render(request, 'videogames/detail.html', { 
         'videogame': videogame, 'playtime_form': playtime_form
     })
+
+def add_playtime(request, videogame_id):
+    # create the ModelForm using the data in request.POST
+    form = PlaytimeForm(request.POST)
+    # validate the form
+    if form.is_valid():
+        # don't save the form to the db until it has the videogame_id assigned
+        new_feeding = form.save(commit=False)
+        new_feeding.videogame_id = videogame_id
+        new_feeding.save()
+    return redirect('detail', videogame_id=videogame_id)
