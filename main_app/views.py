@@ -1,8 +1,16 @@
 from django.shortcuts import render
-# Add the follwoing import
+# Add the following import
+from django.views.generic.edit import CreateView
+# Add the following import
 # from django.http import HttpResponse # Okay to delete this line because home is now rending a home.html
 from .models import Videogame
 
+class VideogameCreate(CreateView):
+    model = Videogame
+    fields = '__all__'
+    # Or you can do
+    # fields = ['name', 'genre', 'description', 'year']
+    
 # # Add the Video Game class & list and view function below the imports
 # class Videogame: # Note that parens are optional if not inheriting from another class
 #     def __init__(self, name, genre, description, year):
