@@ -27,6 +27,8 @@ class Videogame(models.Model):
     genre = models.CharField(max_length=100)
     description = models.TextField(max_length=350)
     year = models.IntegerField()
+    # Add the M:M relationship
+    consoles = models.ManyToManyField(Console)
 
     def __str__(self):
         return self.name
