@@ -84,10 +84,14 @@ def videogames_index(request):
 @login_required
 def videogames_detail(request, videogame_id):
     videogame = Videogame.objects.get(id=videogame_id)
+    # Get the consoles the videogame doesn't have
+    consoles_videogame_doesnt_have = Console.objects.exclude(id__in = videogame.consoles.all().values_list('id'))
     # instantiate PlaytimeForm to be rendered in the template
     playtime_form = PlaytimeForm()
     return render(request, 'videogames/detail.html', { 
-        'videogame': videogame, 'playtime_form': playtime_form
+        'videogame': videogame, 'playtime_form': playtime_form,
+        # Add the toys to be displayed
+        'consoles': consoles_videogame_doesnt_have
     })
 
 @login_required
@@ -102,9 +106,12 @@ def add_playtime(request, videogame_id):
         new_feeding.save()
     return redirect('detail', videogame_id=videogame_id)
 
+def assoc_console(request, videogame_id, console_id):
+    # Note that you can pass a console's id instead of the whole object
+    Videogame.objects.get(id=videogame_id).consoles.add(console_id)
+    return redirect('detail', videogame_id=videogame_id)
+
 # add_photo
-# assoc_playtime
-# unassoc_playtime
 
 def signup(request):
     error_message = ''

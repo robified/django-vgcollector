@@ -19,4 +19,6 @@ urlpatterns = [
     path('consoles/<int:pk>/update/', views.ConsoleUpdate.as_view(), name='consoles_update'),
     path('consoles/<int:pk>/delete/', views.ConsoleDelete.as_view(), name='consoles_delete'),
     path('accounts/signup', views.signup, name='signup'),
+    # associate a console with a videogame (M:M)
+    path('videogames/<int:videogame_id>/assoc_console/<int:console_id>/', views.assoc_console, name='assoc_console'),
 ]
