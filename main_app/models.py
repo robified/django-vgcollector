@@ -40,9 +40,6 @@ class Videogame(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'videogame_id': self.id})
 
-    def played_for_today(self):
-        return self.playtime_set.filter(date=date.today()).count() >= len(TIME_OF_DAY)
-
 class Playtime(models.Model):
     date = models.DateField('play date')
     time_of_day = models.CharField(

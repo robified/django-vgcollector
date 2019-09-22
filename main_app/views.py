@@ -101,9 +101,9 @@ def add_playtime(request, videogame_id):
     # validate the form
     if form.is_valid():
         # don't save the form to the db until it has the videogame_id assigned
-        new_feeding = form.save(commit=False)
-        new_feeding.videogame_id = videogame_id
-        new_feeding.save()
+        new_playtime = form.save(commit=False)
+        new_playtime.videogame_id = videogame_id
+        new_playtime.save()
     return redirect('detail', videogame_id=videogame_id)
 
 def assoc_console(request, videogame_id, console_id):
