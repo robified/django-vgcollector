@@ -89,6 +89,7 @@ def videogames_detail(request, videogame_id):
     # instantiate PlaytimeForm to be rendered in the template
     playtime_form = PlaytimeForm()
     return render(request, 'videogames/detail.html', { 
+        # include the videogame and playtime_form in the context
         'videogame': videogame, 'playtime_form': playtime_form,
         # Add the toys to be displayed
         'consoles': consoles_videogame_doesnt_have

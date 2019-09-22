@@ -30,7 +30,14 @@
             {{ playtime_form.as_p }}
             <input type="submit" class="btn" value="Add Playtime">
         </form>
-
+        
+        <br>
+    {% if videogame.played_for_today %}
+        <div class="card-panel teal-text center-align">{{videogame.name}} has been played all day today</div>
+    {% else %}
+        <div class="card-panel red-text center-align">{{videogame.name}} is waiting to be played</div>
+    {% endif %}
+    
         <table class="striped">
             <thead>
                 <tr><th>Date</th><th>Playtime</th></tr>
@@ -55,7 +62,7 @@
             <div class="card">
                 <div class="card-content">
                     <span class="card-title">
-                    For the {{ console.developer }} {{ console.name }}
+                    For the {{ console.name }} by {{ console.developer }}
                     </span>
                 </div>
             </div>
@@ -84,7 +91,7 @@
         </div>
     {% endfor %}
     {% else %}
-        <h5>{{videogame.name}} Already Has All Consoles Available</h5>
+        <h5><a href="{% url 'consoles_create' %}">Create a Console</a></h5>
     {% endif %}
     </div>
 </div> 
