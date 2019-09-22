@@ -65,8 +65,8 @@ class Playtime(models.Model):
         ordering = ['-date']
 
 class Photo(models.Model):
-    url = models.CharField(max_length=200)
-    videogame = models.ForeignKey(Videogame, on_delete=models.CASCADE)
+  url = models.CharField(max_length=200)
+  videogame = models.ForeignKey(Videogame, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f"Photo for videogame_id: {self.videogame_id} @{self.url}"
+  def __str__(self):
+    return f"Photo for videogame_id: {self.videogame_id} @{self.url}"

@@ -16,7 +16,7 @@ from .models import Videogame, Console, Photo
 
 # Add these "constants" below the imports
 S3_BASE_URL = 'https://s3.us-east-2.amazonaws.com/'
-BUTCKET = 'rdvgcollector'
+BUCKET = 'rdvgcollector'
 
 class VideogameCreate(LoginRequiredMixin, CreateView):
     model = Videogame
