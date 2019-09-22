@@ -23,7 +23,7 @@ class Console(models.Model):
     
     def get_absolute_url(self):
         return reverse('consoles_detail', kwargs={'pk': self.id})
-    
+
 class Videogame(models.Model):
     name = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
@@ -63,3 +63,10 @@ class Playtime(models.Model):
     # change the default sort from lastest to oldest
     class Meta:
         ordering = ['-date']
+
+class Photo(models.Model):
+    url = models.CharField(max_length=200)
+    videogame = models.ForeignKey(Videogame, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Photo for videogame_id: {self.videogame_id} @{self.url}"
